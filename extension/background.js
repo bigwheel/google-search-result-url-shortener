@@ -18,10 +18,8 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 chrome.pageAction.onClicked.addListener(function(tab) {
-	chrome.tabs.query({active: true}, function(tabArray) {
-		var shortenedUrl = getShortenedUrl(tabArray[0].url);
-		if(shortenedUrl) {
-			chrome.tabs.update(tabArray[0].id, {url: shortenedUrl});
-		}
-	});
+	var shortenedUrl = getShortenedUrl(tab.url);
+	if(shortenedUrl) {
+		chrome.tabs.update(tab.id, {url: shortenedUrl});
+	}
 });
